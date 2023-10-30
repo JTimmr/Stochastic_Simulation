@@ -1,45 +1,33 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from time import time
 
-def make_color(n, threshold):
-    # case 1: nr is in mandelbrot set
-    if n == threshold:
-        return (0.9,0.1,0.1)
-    else:
-        color = n / (threshold)
-        return (color, color, color)
+def color_map(n, max_iter):
+    color = np.where(n == max_iter, 0, 1 - (n + 1) / (max_iter))
+    return np.stack((color, color, color), axis=-1)
         
 
 def check_point(c, threshold):
-    z = 0
-    n = 0
-    while abs(z) < 10 and n < threshold:
-        addition = z ** 2 + c
-        z += addition
-        n += 1
-    # Increase i of numbers in mandelbrot set
-    # numbers with i 1 over the limit will be plotted accordingly
-    # if abs(z) < 50:
-    #     i +=1
+    z = np.zeros_like(c)
+    n = np.zeros(c.shape)
+    for _ in range(threshold):
+        z = z ** 2 + c
+        mask = np.abs(z) <= 2
+        n += mask
+    return n
 
-    return make_color(n, threshold)
+threshold = 100
 
-c = complex(0,0)
+real_parts = np.linspace(-2,1,10000)
+imaginary_parts = np.linspace(-1.5,1.5,10000)
 
-threshold = 10
-print(check_point(c, threshold))
+R, I = np.meshgrid(real_parts, imaginary_parts)
 
-real_parts = np.linspace(-3,1,50)
-imaginary_parts = np.linspace(-2,2,50)
+c = R + 1j * I
 
-plt.figure()
+mandelbrot = check_point(c, threshold)
 
+colors = color_map(mandelbrot, threshold)
 
-for real in real_parts:
-    for imaginary in imaginary_parts:
-        c = complex(real,imaginary)
-        color= check_point(c, threshold)
-        plt.scatter(real,imaginary, color=color)
+plt.imshow(colors, extent=(-2, 1, -1.5, 1.5))
 
 plt.show()
