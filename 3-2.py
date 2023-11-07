@@ -55,16 +55,24 @@ print('pi',pi,'mse',estimated_mse,'error',error)
 
 # Simple plot for many r values
 n = 1_000_000
-r = np.linspace(1,100_000,50)
-errors = []
+r = np.linspace(1,100_000,25)
+estimated_mses = []
+pis = []
 
 for i in range(r.shape[0]):
-    print('Iteration',i,'/',r.shape[0])
+    print('Iteration',i+1,'/',r.shape[0])
     pi,estimated_mse = estimate_pi(n,int(r[i]))
-    errors.append(pi - np.pi)
+    pis.append(pi)
+    estimated_mses.append(estimated_mse)
 
 
-plt.plot(r,errors)
+plt.plot(r,estimated_mses)
+plt.tight_layout()
+plt.xlabel('r')
+plt.ylabel('estimated_mses')
+plt.show()
+
+plt.plot(r,pis)
 plt.tight_layout()
 plt.xlabel('r')
 plt.ylabel('pi - np.pi')
