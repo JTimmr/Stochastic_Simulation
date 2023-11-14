@@ -8,6 +8,20 @@ But issue of having smallest error with a single subset remains
 
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy.stats
+
+
+def get_confidence(data,p=0.95):
+    mean = np.mean(data)
+    n = len(data)
+    lamb = scipy.stats.t.ppf((1 + p) / 2, n-1)
+    sigma = np.std(data)
+    confidence = (lamb * sigma)
+    return mean,confidence
+
+
+
+
 
 def calculate_pi(xs, ys, m):
     return np.sum(np.where(xs**2 + ys**2 <= 1, 1, 0)) / m * 4
@@ -44,6 +58,16 @@ def estimate_pi(n,r):
 
 
 
+print('TEST CONFIDENCE')
+data = np.random.normal(0,0,100)
+p = 0.95
+mean,confidence = get_confidence(data,p)
+#print('Data:',data)
+print('p:',p)
+print('mean:',mean,'+-',confidence)
+
+
+"""
 n = 1_000_000
 r = 1
 
@@ -56,6 +80,7 @@ print('pi',pi,'mse',estimated_mse,'error',error)
 # Simple plot for many r values
 n = 1_000_000
 r = np.linspace(1,100_000,25)
+r = np.linspace(1,100_100,10)
 estimated_mses = []
 pis = []
 
@@ -77,3 +102,4 @@ plt.tight_layout()
 plt.xlabel('r')
 plt.ylabel('pi - np.pi')
 plt.show()
+"""
