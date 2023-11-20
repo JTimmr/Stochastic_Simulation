@@ -6,8 +6,8 @@
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/mandelbrot-exploration.git
-   cd mandelbrot-exploration
+   git clone https://github.com/JTimmr/Stochastic_Simulation
+   cd Stochastic_Simulation
 
 2. **Install dependencies:**
     ```bash
