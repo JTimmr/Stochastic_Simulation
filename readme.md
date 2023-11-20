@@ -1,3 +1,8 @@
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT) - see the [LICENSE](LICENSE) file for details.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
 # Overleaf report link
 https://www.overleaf.com/5168435561jzcynvbqcvtt#8e6a2a
 
