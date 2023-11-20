@@ -15,7 +15,7 @@
 
 3. **Open and run the Jupyter Notebook:**
     ```bash
-    jupyter notebook Mandelbrot_Exploration.ipynb
+    jupyter notebook main.ipynb
 
 
 ## Important Note
