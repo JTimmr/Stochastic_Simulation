@@ -1,4 +1,4 @@
-# Same title as report has?
+# Monte Carlo estimation of the Mandelbrot Set area
 
 ## Features
 
